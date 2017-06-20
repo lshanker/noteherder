@@ -32,7 +32,7 @@ ul#notes {
 }
 
 ul#notes > li {
-  height: 100px;
+  height: 120px;
   font-size: 90%;
   cursor: pointer;
   overflow: hidden;
@@ -72,7 +72,7 @@ ul#notes li .note-title {
   text-overflow: ellipsis;
 }
 ul#notes li .note-body {
-  height: 54px;
+  height: 44px;
   overflow: hidden;
   margin-top: 0.5rem;
 }
