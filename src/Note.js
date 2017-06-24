@@ -15,10 +15,14 @@ class Note extends Component{
                  {this.props.content}
                 </p>
               </div>
-              <button>Delete</button>
+              <button onClick = {this.handleDelete.bind(this)}>Delete</button>
             </div>
           </li>
         );
+    }
+
+    handleDelete(){
+      this.props.delFunction(this.props.id);
     }
 }
 

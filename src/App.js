@@ -7,7 +7,7 @@ class App extends Component {
 
   constructor(){
     super();
-    initialize();
+    
   }
 
   render() {
@@ -17,11 +17,11 @@ class App extends Component {
   }
 }
 
-function initialize(){
+/*function initialize(){
   if(!localStorage.getItem('notes')){
     let notes = [];
     localStorage.setItem('notes', JSON.stringify(notes));
   }
-}
+}*/
 
 export default App;

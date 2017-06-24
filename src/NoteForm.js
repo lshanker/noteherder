@@ -8,6 +8,7 @@ class NoteForm extends Component{
 
       this.state = {
         note: {
+          id: null,
           title: "",
           content: ""
         }
@@ -17,19 +18,19 @@ class NoteForm extends Component{
     
     render(){
         return(
-               <div className="NoteForm">
-        <form onSubmit = {this.processNote.bind(this)}>
-          <p>
-            <input type="text" name="title" placeholder="Title your note" onChange = {this.changeNote.bind(this)}/>
-          </p>
-          <p>
-            <textarea name="body" cols="30" rows="10" placeholder="Just start typing..." onChange = {this.changeNote.bind(this)}></textarea>
-          </p>
-          <p>
-            <button type = "submit" name = "submitButton" >Create Note</button> 
-          </p>
-        </form >
-      </div>
+          <div className="NoteForm">
+           <form onSubmit = {this.processNote.bind(this)}>
+              <p>
+                <input type="text" name="title" placeholder="Title your note" onChange = {this.changeNote.bind(this)}/>
+             </p>
+             <p>
+                <textarea name="body" cols="30" rows="10" placeholder="Just start typing..." onChange = {this.changeNote.bind(this)}></textarea>
+             </p>
+              <p>
+               <button type = "submit" name = "submitButton" >Create Note</button> 
+             </p>
+            </form >
+         </div>
         );
     }
 
@@ -50,11 +51,15 @@ class NoteForm extends Component{
 
 
  processNote(ev){
-  
   ev.preventDefault();
-
-  //debugger;
-
+  ev.target.reset();
+  this.setState(
+     {note: {
+          id: null,
+          title: "",
+          content: ""
+        }}
+  )
   this.props.fetchFunction(this.state.note);
 }
 
