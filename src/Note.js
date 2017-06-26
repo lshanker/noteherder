@@ -5,25 +5,30 @@ import './Note.css';
 class Note extends Component{
     render(){
         return(
-            <li>
-            <div className="note">
-              <div className="note-title">
-                {this.props.title}
+            <li onClick = {() => {this.props.getNoteFunction(this.props.note)}}>
+            <div className="note" >
+              <div className="note-title" >
+                {this.props.note.title}
               </div>
-              <div className="note-body">
+              <div className="note-body" >
                 <p>
-                 {this.props.content}
+                 {this.props.note.content}
                 </p>
               </div>
-              <button onClick = {this.handleDelete.bind(this)}>Delete</button>
+             
             </div>
           </li>
+      
+    
+      
         );
     }
 
     handleDelete(){
       this.props.delFunction(this.props.id);
     }
+
+
 }
 
 

@@ -14,21 +14,21 @@
   padding: 0;
 }
 
-
 .NoteForm button i.fa {
-  color: #999;
+  color: white;
   font-size: 2rem;
   margin: 0;
 }
-.NoteForm button[type="submit"] {
+.NoteForm button {
   background-color: #008BF8;
   border-radius: 4px;
   color: white;
   font-size: 1.4rem;
   padding: 1rem;
+  margin-left: 10px;
 }
 
-.NoteForm button[type="submit"]:hover {
+.NoteForm button:hover {
   background-color: #51b2ff;
 }
 

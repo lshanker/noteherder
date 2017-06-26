@@ -11,18 +11,28 @@ class Main extends Component{
         super();
         
          this.state = {
-      notes: {
+          notes: {
         'note-1': {
           id: 'note-1',
           title: 'Thoughts on React',
           content: 'React is pretty nifty. Declarative FTW! 🎸',
         },
-        'note-2': {
+         'note-2': {
           id: 'note-2',
           title: 'State and props?',
           content: 'Wat',
         },
+
+    
       },
+
+          curNote: {
+          id: null,
+          title: "",
+          content: "",
+      }
+
+  
         }
     }
 
@@ -30,58 +40,55 @@ class Main extends Component{
         return(
             <div id = "container">
                 <Nav />
-                <NoteList notes = {this.state.notes} delFunction = {this.deleteNote.bind(this)}/>
-                <NoteForm fetchFunction = {this.fetch.bind(this)}/>
+                <NoteList  getNoteFunction = {this.getNoteConent.bind(this)} notes = {this.state.notes} delFunction = {this.deleteNote.bind(this)}/>
+                <NoteForm deleteNote = {this.deleteNote.bind(this)} saveNote = {this.saveNote.bind(this)} curNote = {this.state.curNote} fetchFunction = {this.fetch.bind(this)}/>
            </div>
         );
     }
 
-    deleteNote = (id) => {
+    deleteNote = (curNote) => {
+        let id = curNote.id;
+
         let notesCopy = {...this.state.notes};
         delete notesCopy[id];
         this.setState({notes: notesCopy});
+        
+
+        this.setState({curNote: this.blankNote()})
     }
 
-    fetch = (note) => {
 
+    blankNote = () => {
+        return(
+            {
+                title: "",
+                content: "",
+                id: null,
+            }
+        );
+    }
 
-         if (!note.id) {
-             //QUESTION what is the $ syntax
-        note.id = `note-${Date.now()}`
+    getNoteConent = (note) => {
+        this.setState({curNote: note});
+    }
+
+    saveNote = (curNote) => {
+
+         if (!curNote.id) {
+             curNote.id = `note-${Date.now()}`
          }
 
-    const notes = {...this.state.notes}
-    notes[note.id] = note
-    this.setState({ notes })
+        this.setState({curNote})
     
+        let notes = {...this.state.notes}
+        notes[curNote.id] = curNote
+        this.setState({notes})
 
-        /*
-        debugger;
+    }
 
-        console.log("Notes in state: ");
-        console.log(this.state.noteArray)
 
-        console.log(note);
-
-        debugger;
-        const tempNotes = [... this.state.noteArray.slice()];  
-
-        console.log("TempNotes before unshift")
-        //console.log(tempNotes);
-
-        tempNotes.unshift(note);
-
-        console.log("After unshift")
-        //console.log(tempNotes)
-
-        console.log(this.state.noteArray);
-
-        this.setState({noteArray: tempNotes});
-
-        console.log(this.state.noteArray);
-        debugger;
-        */
-    
+    fetch = (curNote) => {
+        this.setState({curNote})
     }
 }
 

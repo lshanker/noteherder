@@ -21,13 +21,14 @@ class NoteForm extends Component{
           <div className="NoteForm">
            <form onSubmit = {this.processNote.bind(this)}>
               <p>
-                <input type="text" name="title" placeholder="Title your note" onChange = {this.changeNote.bind(this)}/>
+                <input type="text" name="title" placeholder = "Title your note" onChange = {this.changeNote.bind(this)} value = {this.props.curNote.title} />
              </p>
              <p>
-                <textarea name="body" cols="30" rows="10" placeholder="Just start typing..." onChange = {this.changeNote.bind(this)}></textarea>
+                <textarea value = {this.props.curNote.content} name="content" cols="30" rows="10" placeholder= "Just start typing..." onChange = {this.changeNote.bind(this)}></textarea>
              </p>
               <p>
                <button type = "submit" name = "submitButton" >Create Note</button> 
+               <button type = "button" name = "deleteButton" onClick = {() => {this.props.deleteNote(this.props.curNote)}}> <i className="fa fa-trash" aria-hidden="true"></i> </button>
              </p>
             </form >
          </div>
@@ -35,6 +36,13 @@ class NoteForm extends Component{
     }
 
  changeNote(ev){
+
+  //[... stuff] is called spread
+    const curNote = {...this.props.curNote};
+    curNote[ev.target.name] = ev.target.value;
+    
+    this.props.saveNote(curNote);
+
    let newValue = ev.target.value;
    
    if(ev.target.name === "title"){
@@ -52,15 +60,13 @@ class NoteForm extends Component{
 
  processNote(ev){
   ev.preventDefault();
-  ev.target.reset();
-  this.setState(
-     {note: {
-          id: null,
-          title: "",
-          content: ""
-        }}
-  )
-  this.props.fetchFunction(this.state.note);
+
+  let curNote = {...this.props.curNote}
+  curNote['title'] = "";
+  curNote['content'] = "";
+  curNote['id'] = null;
+
+  this.props.fetchFunction(curNote);
 }
 
 }
