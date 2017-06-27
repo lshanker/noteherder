@@ -15,7 +15,6 @@ class Note extends Component{
                  {this.props.note.content}
                 </p>
               </div>
-             
             </div>
           </li>
       
