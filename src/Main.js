@@ -5,6 +5,8 @@ import Nav from './Nav.js'
 import NoteList from './NoteList.js'
 import NoteForm from './NoteForm'
 
+import base from './base'
+
 class Main extends Component{
 
     constructor(){
@@ -34,6 +36,20 @@ class Main extends Component{
 
   
         }
+
+            
+   
+}
+
+    componentWillMount(){
+         base.syncState(
+         'notes',
+            {
+          context: this,
+          state: 'notes',
+
+         }
+        )
     }
 
     render(){
