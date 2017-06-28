@@ -46,7 +46,15 @@ class Main extends Component{
 }
 
     componentWillMount(){
-       
+        //Called any time the state changes
+       auth.onAuthStateChanged(
+           (user) => {
+                if(user){
+                    //We are already signed in
+                    this.authHandler(user);
+                }
+           }
+       )
     }
 
     signedIn = () => {
@@ -95,7 +103,7 @@ class Main extends Component{
         return(
             <div id = "container">
 
-                {this.signedIn() ? this.renderMain() : <SignIn authHandler = {this.authHandler}/>}
+                {this.signedIn() ? this.renderMain() : <SignIn/>}
              
            </div>
         );
