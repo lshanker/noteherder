@@ -30,6 +30,8 @@ class Main extends Component{
     
       },
 
+      uid: null,
+
           curNote: {
           id: null,
           title: "",
@@ -55,14 +57,22 @@ class Main extends Component{
     }
 
     signedIn = () => {
-        return true;
+        return this.state.uid;
+    }
+
+    signOut = () => {
+        this.setState({uid: null})
+    }
+
+    authHandler = (userData) => {
+        this.setState({uid: userData.uid})
     }
 
     renderMain = () => {
         return(
             <div id = "container">
-                <SignOut />
-                   <Nav />     
+                <SignOut signOut = {this.signOut}/>
+                <Nav />     
                 <NoteList  getNoteFunction = {this.getNoteConent.bind(this)} notes = {this.state.notes} delFunction = {this.deleteNote.bind(this)}/>
                 <NoteForm deleteNote = {this.deleteNote.bind(this)} saveNote = {this.saveNote.bind(this)} curNote = {this.state.curNote} fetchFunction = {this.fetch.bind(this)}/>
             </div>
@@ -73,7 +83,7 @@ class Main extends Component{
         return(
             <div id = "container">
 
-                {this.signedIn() ? this.renderMain() : <SignIn />}
+                {this.signedIn() ? this.renderMain() : <SignIn authHandler = {this.authHandler}/>}
              
            </div>
         );
