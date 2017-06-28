@@ -3,13 +3,13 @@ import './App.css';
 
 import Main from './Main.js';
 
-import base from './base';
 
 class App extends Component {
 
   constructor(){
     super();
-    
+
+
   }
 
   render() {

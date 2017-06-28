@@ -4,6 +4,8 @@ import './Main.css';
 import Nav from './Nav.js'
 import NoteList from './NoteList.js'
 import NoteForm from './NoteForm'
+import SignIn from './SignIn'
+import SignOut from './SignOut'
 
 import base from './base'
 
@@ -52,12 +54,27 @@ class Main extends Component{
         )
     }
 
+    signedIn = () => {
+        return true;
+    }
+
+    renderMain = () => {
+        return(
+            <div id = "container">
+                <SignOut />
+                   <Nav />     
+                <NoteList  getNoteFunction = {this.getNoteConent.bind(this)} notes = {this.state.notes} delFunction = {this.deleteNote.bind(this)}/>
+                <NoteForm deleteNote = {this.deleteNote.bind(this)} saveNote = {this.saveNote.bind(this)} curNote = {this.state.curNote} fetchFunction = {this.fetch.bind(this)}/>
+            </div>
+        )
+    }
+
     render(){
         return(
             <div id = "container">
-                <Nav />
-                <NoteList  getNoteFunction = {this.getNoteConent.bind(this)} notes = {this.state.notes} delFunction = {this.deleteNote.bind(this)}/>
-                <NoteForm deleteNote = {this.deleteNote.bind(this)} saveNote = {this.saveNote.bind(this)} curNote = {this.state.curNote} fetchFunction = {this.fetch.bind(this)}/>
+
+                {this.signedIn() ? this.renderMain() : <SignIn />}
+             
            </div>
         );
     }
