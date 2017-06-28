@@ -7,7 +7,7 @@ import NoteForm from './NoteForm'
 import SignIn from './SignIn'
 import SignOut from './SignOut'
 
-import base from './base'
+import base, {auth} from './base'
 
 class Main extends Component{
 
@@ -61,7 +61,12 @@ class Main extends Component{
     }
 
     signOut = () => {
-        this.setState({uid: null})
+        auth
+            .signOut()
+            .then(() => {
+                this.setState({uid: null})
+            })
+        
     }
 
     authHandler = (userData) => {
