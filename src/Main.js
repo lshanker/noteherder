@@ -46,14 +46,7 @@ class Main extends Component{
 }
 
     componentWillMount(){
-         base.syncState(
-         'notes',
-            {
-          context: this,
-          state: 'notes',
-
-         }
-        )
+       
     }
 
     signedIn = () => {
@@ -64,13 +57,27 @@ class Main extends Component{
         auth
             .signOut()
             .then(() => {
-                this.setState({uid: null})
+                this.setState({ uid: null})
             })
         
     }
 
+    syncNotes = () => {
+        base.syncState(
+         `${this.state.uid}/notes`, //In firebase, you use / instead of .
+            {
+          context: this,
+          state: 'notes',
+         }
+        )
+    }
+
     authHandler = (userData) => {
-        this.setState({uid: userData.uid})
+        this.setState(
+                    {uid: userData.uid}, 
+                    this.syncNotes
+                     )
+        
     }
 
     renderMain = () => {
